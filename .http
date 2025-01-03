@@ -1,0 +1,14 @@
+###
+POST http://localhost:5000/api/auth/create-organization HTTP/1.1
+content-type: application/json
+
+{
+    "organization_name": "Organization 3"
+}
+
+
+###
+GET http://localhost:5000/api/auth HTTP/1.1
+content-type: application/json
+x-api-key: 9kD1KBgJcZ-w6tdzwOyayP32c0mumI0ZxDlZiLJWNfc
+
