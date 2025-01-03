@@ -1,0 +1,18 @@
+### Create new organization
+POST http://localhost:5000/api/organization/create HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Legal control BB",
+    "db_server": "10.95.201.18",
+    "db_name": "lcr_LegalControl_Vigna_atc",
+    "db_user": "LCVigna",
+    "db_password": "2016@Vigna"
+}
+
+
+### Verify api key
+GET http://localhost:5000/api/auth/verify-key HTTP/1.1
+content-type: application/json
+x-api-key: OpB7ixY7WxoqENZ7uYANoWGCN9IGizB7H_hsMdmK2x4
+
