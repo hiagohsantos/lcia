@@ -2,7 +2,15 @@
 from groq import Groq
 import json
 
-class ProcessService:
+from app.models.file import File
+from app.repositories.base_repository import BaseRepository
+
+class PublishService:
+    def __init__(self):
+        # Repositórios injetados como dependências
+        self._file_repository = BaseRepository(File)
+
+
     @staticmethod
     def get_process_by_id(process_id):
         try:  
@@ -45,6 +53,32 @@ class ProcessService:
             print(e)
             return None
 
+
+    def create_file(self, file) -> File:
+        try:
+           
+            file_data = {
+                'filename': file.filename.split('.')[0],  
+                'file_extension': file.filename.split('.')[-1],  
+                'file_size': len(file.read()), 
+                }
+            
+            file_instance = self._file_repository.create(File.from_dict(file_data))
+            return file_instance
+        
+        except Exception as e:
+            print(e)
+            return None
+    
+    def get_file_by_id(self, file_id: str) -> File | None:
+        try:
+            
+            file_instance = self._file_repository.get(id=file_id)
+            return file_instance
+        
+        except Exception as e:
+            print(e)
+            return None
     
 
        

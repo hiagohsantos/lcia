@@ -14,5 +14,23 @@ content-type: application/json
 ### Verify api key
 GET http://localhost:5000/api/auth/verify-key HTTP/1.1
 content-type: application/json
-x-api-key: OpB7ixY7WxoqENZ7uYANoWGCN9IGizB7H_hsMdmK2x4
+x-api-key: YoY6SKh_8fKY8XP89lCw6U14r31BZ_VWf_q87RVyGC8
 
+
+### Send File
+POST http://localhost:5000/api/publish/upload  HTTP/1.1
+Content-Type: multipart/form-data; boundary=boundary123; charset=utf-8
+x-api-key: YoY6SKh_8fKY8XP89lCw6U14r31BZ_VWf_q87RVyGC8
+
+--boundary123
+Content-Disposition: form-data; name="file"; filename="assistant.py"
+Content-Type: text/plain
+
+< C:\LC\Vigna\Scripts\LangChain\assistant.py
+--boundary123--
+
+
+### Get File by Id
+GET http://localhost:5000/api/publish/file/c1d39f7f-97e7-4587-a4d2-674c0dcd9f25 HTTP/1.1
+content-type: application/json
+x-api-key: YoY6SKh_8fKY8XP89lCw6U14r31BZ_VWf_q87RVyGC8
