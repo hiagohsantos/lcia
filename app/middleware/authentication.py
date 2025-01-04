@@ -11,7 +11,7 @@ def require_auth(f):
             api_key = request.headers.get('x-api-key') 
 
             if not api_key:
-                return jsonify({'message': 'API key é necessária!'}), 401
+                return jsonify({'message': 'Uma API-Key e necessaria. Adicione x-api-key:<key> no header da requisicao.'}), 401
             
             service = AuthService()
             hash = service.hash_api_key(api_key)

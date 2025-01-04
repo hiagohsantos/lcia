@@ -26,7 +26,6 @@ class BaseRepository:
         db.session.commit()
         return instance
 
-  
 
     def update(self, id, **kwargs):
         instance = self.model.query.get(id)
