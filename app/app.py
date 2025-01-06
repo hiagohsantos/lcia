@@ -1,5 +1,6 @@
 from flask import Flask
 from app.extensions import db, ma
+from app.repositories.connection_pool import DatabaseConnectionPool
 from app.routes import register_routes
 from flask_migrate import Migrate
 
@@ -13,5 +14,5 @@ def create_app() -> Flask:
     Migrate(app, db)
 
     register_routes(app)
-
+    
     return app

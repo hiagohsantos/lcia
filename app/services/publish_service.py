@@ -3,6 +3,8 @@ from groq import Groq
 import json
 
 from app.models.file import File
+from app.models.organization import Organization
+from app.repositories.LC_repository import LCRepository
 from app.repositories.base_repository import BaseRepository
 
 class PublishService:
@@ -12,11 +14,18 @@ class PublishService:
 
 
     @staticmethod
-    def get_process_by_id(process_id):
+    def get_publish_by_id(publish_id, organization: Organization):
         try:  
+
+            print(f"buscando publicacao id {publish_id} para organizacao {organization.name}")
             # Validação do ID
-            if process_id <= 0:
+            if publish_id <= 0:
                 raise ValueError("ID inválido fornecido.")
+            
+            _repository = LCRepository(organization)
+            #_repository.get_publish_by_id(publish_id)
+            #_repository.get_process_by_id(publish_id)
+            _repository.get_process_client_position(publish_id)
 
             # process = ProcessRepository.get_by_id(process_id)
             # client = Groq(api_key="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")
