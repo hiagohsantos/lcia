@@ -12,7 +12,7 @@ bp = Blueprint('publish', __name__)
 def publish(publish_id, organization: Organization)-> Response:
     try:
        
-        process_data = PublishService.get_publish_by_id(publish_id, organization)
+        process_data = PublishService(organization).get_publish_by_id(publish_id)
         return jsonify(process_data), 200
         
     except ValueError as e:
