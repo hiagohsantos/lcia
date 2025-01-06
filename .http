@@ -23,7 +23,7 @@ x-api-key: {{Vigna_apiKey}}
 
 
 ### Get Publish by Id
-GET {{baseUrl}}/publish/10241 HTTP/1.1
+GET {{baseUrl}}/publish/580695 HTTP/1.1
 content-type: application/json
 x-api-key: {{Vigna_apiKey}}
 
