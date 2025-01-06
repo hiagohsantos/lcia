@@ -1,9 +1,14 @@
+### Variáveis de ambiente
+@baseUrl = http://localhost:5000/api
+@Vigna_apiKey = eXIL0Fi8R-GghtUgQ6_XRVXgh__5typey_aG0VuNDWE
+
+
 ### Create new organization
 POST http://localhost:5000/api/organization/create HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Legal control BB",
+    "name": "Vigna",
     "db_server": "10.95.201.18",
     "db_name": "lcr_LegalControl_Vigna_atc",
     "db_user": "LCVigna",
@@ -12,9 +17,15 @@ content-type: application/json
 
 
 ### Verify api key
-GET http://localhost:5000/api/auth/verify-key HTTP/1.1
+GET {{baseUrl}}/auth/verify-key HTTP/1.1
 content-type: application/json
-x-api-key: YoY6SKh_8fKY8XP89lCw6U14r31BZ_VWf_q87RVyGC8
+x-api-key: {{Vigna_apiKey}}
+
+
+### Get Publish by Id
+GET {{baseUrl}}/publish/10241 HTTP/1.1
+content-type: application/json
+x-api-key: {{Vigna_apiKey}}
 
 
 ### Send File
@@ -34,3 +45,9 @@ Content-Type: text/plain
 GET http://localhost:5000/api/publish/file/c1d39f7f-97e7-4587-a4d2-674c0dcd9f25 HTTP/1.1
 content-type: application/json
 x-api-key: YoY6SKh_8fKY8XP89lCw6U14r31BZ_VWf_q87RVyGC8
+
+
+
+
+
+

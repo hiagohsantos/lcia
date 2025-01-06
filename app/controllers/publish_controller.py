@@ -1,4 +1,6 @@
 from flask import Blueprint, Response, jsonify, request, current_app, send_from_directory
+from app.models.organization import Organization
+from app.repositories.LC_repository import LCRepository
 from app.services.publish_service import PublishService
 from app.middleware.authentication import require_auth
 import os
@@ -6,9 +8,11 @@ import os
 bp = Blueprint('publish', __name__)
 
 @bp.route('/publish/<int:publish_id>', methods=['GET'])
-def publish(publish_id)-> Response:
+@require_auth
+def publish(publish_id, organization: Organization)-> Response:
     try:
-        process_data = PublishService.get_process_by_id(publish_id)
+       
+        process_data = PublishService.get_publish_by_id(publish_id, organization)
         return jsonify(process_data), 200
         
     except ValueError as e:
