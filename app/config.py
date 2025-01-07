@@ -1,12 +1,17 @@
 import os
 from app.repositories.connection_pool import DatabaseConnectionPool
+from dotenv import load_dotenv
 
+load_dotenv()
 class Config:
     # Configurações gerais
     JSON_AS_ASCII = False
     GROQ_API_KEY = os.getenv('GROQ_API_KEY')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+    PINECONE_API_KEY= os.getenv('PINECONE_API_KEY')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+    
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Pool de conexões para SQL Server
     DB_POOL = DatabaseConnectionPool(max_size=50)
