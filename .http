@@ -6,9 +6,10 @@
 ### Create new organization
 POST http://localhost:5000/api/organization/create HTTP/1.1
 content-type: application/json
+x-api-key: HWQzC6jcgqeobPYSv7jdwYk8epBSCbr5zTlrng6KpopdJDy8On7F1CjjhgNwMOScrYEGoef0dyuxNqUrEM3XKI03bhTBIMqEgK0gCvkeUbzLrORamfHvaNA8iME2tdZV
 
 {
-    "name": "Vigna",
+    "name": "Vigna3",
     "db_server": "10.95.201.18",
     "db_name": "lcr_LegalControl_Vigna_atc",
     "db_user": "LCVigna",

@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from app.extensions import db, ma
 from app.repositories.connection_pool import DatabaseConnectionPool
+from app.repositories.seed import seed_data
 from app.routes import register_routes
 from flask_migrate import Migrate
 
@@ -16,5 +17,8 @@ def create_app() -> Flask:
     Migrate(app, db)
 
     register_routes(app)
-    
+
+    with app.app_context():
+        seed_data() 
+        
     return app

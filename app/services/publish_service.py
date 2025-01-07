@@ -1,9 +1,3 @@
-#from app.repositories.publish_repository import ProcessRepository
-from flask import config, current_app
-from groq import Groq
-import json
-
-from app.models.appointment_extration import AppointmentExtraction
 from app.models.file import File
 from app.models.organization import Organization
 from app.repositories.LC_repository import LCRepository
@@ -11,9 +5,10 @@ from app.repositories.base_repository import BaseRepository
 from app.services.groq_service import GroqClient
 from app.services.openai_service import OpenAIClient
 
+import json
+
 class PublishService:
     def __init__(self, organization: Organization):
-        # Repositórios injetados como dependências
         self._file_repository = BaseRepository(File)
         self.organization = organization
         self._repository = LCRepository(organization)

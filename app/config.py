@@ -9,6 +9,7 @@ class Config:
     GROQ_API_KEY = os.getenv('GROQ_API_KEY')
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
     PINECONE_API_KEY= os.getenv('PINECONE_API_KEY')
+    ADM_API_KEY= os.getenv("ADM_API_KEY")
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
