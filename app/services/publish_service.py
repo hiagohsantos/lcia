@@ -9,6 +9,7 @@ from app.models.organization import Organization
 from app.repositories.LC_repository import LCRepository
 from app.repositories.base_repository import BaseRepository
 from app.services.groq_service import GroqClient
+from app.services.openai_service import OpenAIClient
 
 class PublishService:
     def __init__(self, organization: Organization):
@@ -26,14 +27,30 @@ class PublishService:
             publish = self._repository.get_publish_by_id(publish_id)
             if not publish: return None
             
-            print(publish.sentence)
-            schema_json = AppointmentExtraction.model_json_schema()
-
-            prompty = f"""Analise o texto informado e extraia todos os compromissos em formato JSON."""
+            #schema_json = AppointmentExtraction.model_json_schema()
+    
+            client = OpenAIClient()
             
-            client = GroqClient()
-            response = client.send_message(schema_json, prompty, publish.sentence)
-            print(response)
+            prompty = f"""Analise o texto informado e extraia todos os prazo solicitados as partes do processo em formato JSON."""
+
+            schema = {
+                "appointments": [ 
+                    {
+                        "description": "Descrição detalhada da ação obrigatória ou dirigida às partes envolvidas no processo. Inclua instruções claras e detalhadas sobre o que a parte precisa fazer, sem mencionar opções ou sugestões.",
+                        "text": "Trecho do texto onde a ação foi encontrada. Inclua citações relevantes para contexto.",
+                        "summary": "Resumo detalhado da ação direta, incluindo prazos por extenso, explicando a finalidade e as implicações da ação solicitada.",
+                        "start_date": "Data e hora de início do prazo no formato ISO 8601 (YYYY-MM-DDTHH:MM).",
+                        "end_date": "Data e hora de finalização do prazo no formato ISO 8601 (YYYY-MM-DDTHH:MM).",
+                    }
+                ]
+            }
+
+            response = client.send_message(schema, prompty, publish.sentence)
+            response['publish_id'] = publish_id
+            response['original_text'] = publish.sentence
+            
+            print("\n",json.dumps(response, indent=4, ensure_ascii=False))
+            return response
 
         except Exception as e:
             print(e)

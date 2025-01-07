@@ -1,4 +1,5 @@
 from app.models.apikey import ApiKey
+from app.models.file import File
 from app.models.input_models.organization_input import OrganizationInputModel
 from app.models.organization import Organization
 from app.repositories.base_repository import BaseRepository
@@ -9,6 +10,7 @@ class OrganizationService:
         # Repositórios injetados como dependências
         self.organization_repo = BaseRepository(Organization)
         self.apikey_repo =  BaseRepository(ApiKey)
+
 
     def create_organization_and_api_key(self, input: OrganizationInputModel):
         try: 
